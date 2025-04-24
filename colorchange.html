@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <style>
+    body{
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        transition: background-color 0.5 ease;
+    }
+    h1{
+        margin-top: 50px;
+    }
+    button{
+        margin: 20px;
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+   </style>
+</head>
+<body>
+    <h1>Color Change</h1>
+    <p id="colorChange">Color Change: none</p>
+    <button id="StartBtn">Start</button>
+    <button id="StopBtn">Stop</button>
+
+    <script>
+        let colors=["red", "pink", "yellow", "black", "orange", "green"];
+        let index= 0;
+        let IntervalId= null;
+
+        const colorChange = document.getElementById('colorChange');
+        const StartBtn = document.getElementById('StartBtn');
+        const StopBtn = document.getElementById('StopBtn');
+
+        const startColorChange= ()=>{
+            if(!IntervalId){
+                IntervalId= setInterval(()=>{
+                    document.body.style.backgroundColor= colors[index];
+                    colorChange.textContent= `colorChange:${colors[index]}`;
+                    index= (index+1) % colors.length;
+                },1000)
+            }
+        };
+        const stopColorChange= () =>{
+            clearInterval(IntervalId);
+            IntervalId=null;
+            colorChange = "Current Color: none";
+        }
+
+        StartBtn.addEventListener("click",startColorChange);
+        StopBtn.addEventListener("click",stopColorChange);
+
+    </script>
+</body>
+</html>
